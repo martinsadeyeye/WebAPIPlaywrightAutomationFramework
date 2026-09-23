@@ -1,0 +1,20 @@
+export interface UserSchemaData {
+  properties: {
+    id: {
+      type: number;
+    };
+    name: {
+      type: string;
+    };
+    email: {
+      type: string;
+    };
+    gender: {
+      type: string;
+    };
+    status: {
+      type: string;
+    };
+  };
+  required: ["id", "name", "email", "gender", "status"];
+}
