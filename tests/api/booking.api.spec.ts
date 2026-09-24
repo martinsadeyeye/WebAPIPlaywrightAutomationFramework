@@ -6,8 +6,8 @@ let bookingId: number;
 
 test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
   //GET
-  test("GET All Booking Ids Test", async ({ apiHelper }) => {
-    let response = await apiHelper.get("/booking");
+  test("GET All Booking Ids Test", async ({ bookerApiHelper }) => {
+    let response = await bookerApiHelper.get("/booking");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -16,8 +16,8 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
   });
 
   //GET
-  test("GET Booking Id detail Test", async ({ apiHelper }) => {
-    let response = await apiHelper.get(`/booking/${bookingId}`);
+  test("GET Booking Id detail Test", async ({ bookerApiHelper }) => {
+    let response = await bookerApiHelper.get(`/booking/${bookingId}`);
 
     expect(response.status).toBe(200);
     expect(response.body.firstname).toBeTruthy();
@@ -26,7 +26,7 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
   });
 
   //POST
-  test("POST API - Create a Booking", async ({ apiHelper }) => {
+  test("POST API - Create a Booking", async ({ bookerApiHelper }) => {
     let userData = {
       firstname: "Seun",
       lastname: "Brown",
@@ -39,7 +39,7 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
       additionalneeds: "Breakfast",
     };
 
-    let response = await apiHelper.post("/booking", userData);
+    let response = await bookerApiHelper.post("/booking", userData);
 
     expect(response.status).toBe(200);
     bookingId = response.body.bookingid;
@@ -56,20 +56,20 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
   });
 
   //POST - Create Token
-  test("POST API - Create Booking Token", async ({ apiHelper }) => {
+  test("POST API - Create Booking Token", async ({ bookerApiHelper }) => {
     let userData = {
       username: "admin",
       password: "password123",
     };
 
-    let response = await apiHelper.post("/auth", userData);
+    let response = await bookerApiHelper.post("/auth", userData);
     expect(response.status).toBe(200);
     token = response.body.token;
     console.log("New Token: ", token);
   });
 
   //PUT
-  test("PUT API - Full update a Booking", async ({ apiHelper }) => {
+  test("PUT API - Full update a Booking", async ({ bookerApiHelper }) => {
     let userData = {
       firstname: "James",
       lastname: "Brown",
@@ -86,7 +86,7 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
       Cookie: `token=${token}`, // built here, at execution time, when token is populated
     };
 
-    let response = await apiHelper.put(
+    let response = await bookerApiHelper.put(
       `/booking/${bookingId}`,
       userData,
       AUTH_HEADER,
@@ -105,7 +105,7 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
   });
 
   //PATCH - Partial Update (API docs claim partial payload works via PUT, but the live API rejects it — full payload required)
-  test("PATCH API - Partial update a Booking", async ({ apiHelper }) => {
+  test("PATCH API - Partial update a Booking", async ({ bookerApiHelper }) => {
     let userData = {
       firstname: "James",
       lastname: "Brown",
@@ -122,7 +122,7 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
       Cookie: `token=${token}`,
     };
 
-    let response = await apiHelper.put(
+    let response = await bookerApiHelper.put(
       `/booking/${bookingId}`,
       userData,
       AUTH_HEADER,
@@ -134,14 +134,17 @@ test.describe.serial("Running E2E  Booking CRUD apis tests", () => {
   });
   //DELETE
   test("Delete API - Delete a Booking using BookingID", async ({
-    apiHelper,
+    bookerApiHelper,
   }) => {
     let AUTH_HEADER = {
       Cookie: `token=${token}`,
     };
 
     console.log("Deleted Booking ID: ", bookingId);
-    let response = await apiHelper.delete(`/booking/${bookingId}`, AUTH_HEADER);
+    let response = await bookerApiHelper.delete(
+      `/booking/${bookingId}`,
+      AUTH_HEADER,
+    );
 
     expect(response.status).toBe(201);
   });

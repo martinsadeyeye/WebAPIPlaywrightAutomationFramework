@@ -8,7 +8,7 @@ let AUTH_HEADER = {
 
 //Helper - generic function -- create a user (POST- CALL)
 
-async function createUser(apiHelper: any) {
+async function createUser(goRestApiHelper: any) {
   //User JS Object
   let userData = {
     name: "PW User",
@@ -17,7 +17,7 @@ async function createUser(apiHelper: any) {
     status: "active",
   };
 
-  let response = await apiHelper.post(
+  let response = await goRestApiHelper.post(
     "/public/v2/users",
     userData,
     AUTH_HEADER,
@@ -29,12 +29,12 @@ async function createUser(apiHelper: any) {
 //Test case 1: create a user test + verify : AAA
 // POST call --> Retrieve the USER ID ---
 // GET Call --> verify the User created
-test("Create a user test", async ({ apiHelper }) => {
+test("Create a user test", async ({ goRestApiHelper }) => {
   //Create a user
-  let userResponse = await createUser(apiHelper);
+  let userResponse = await createUser(goRestApiHelper);
 
   //get a user
-  let getResponse = await apiHelper.get(
+  let getResponse = await goRestApiHelper.get(
     `/public/v2/users/${userResponse.id}`,
     AUTH_HEADER,
   );
@@ -47,12 +47,12 @@ test("Create a user test", async ({ apiHelper }) => {
 // GET Call --> verify the User created using /userID
 // PUT Call- update user details using /userID
 // GET Call --> verify the User updated using /userID
-test("update a user test", async ({ apiHelper }) => {
+test("update a user test", async ({ goRestApiHelper }) => {
   //1. Create a user
-  let userResponse = await createUser(apiHelper);
+  let userResponse = await createUser(goRestApiHelper);
 
   //2. get a user
-  let getResponse = await apiHelper.get(
+  let getResponse = await goRestApiHelper.get(
     `/public/v2/users/${userResponse.id}`,
     AUTH_HEADER,
   );
@@ -67,7 +67,7 @@ test("update a user test", async ({ apiHelper }) => {
     status: "inactive",
   };
 
-  let updateResponse = await apiHelper.put(
+  let updateResponse = await goRestApiHelper.put(
     `/public/v2/users/${userResponse.id}`,
     userUpdatedData,
     AUTH_HEADER,
@@ -79,7 +79,7 @@ test("update a user test", async ({ apiHelper }) => {
   expect.soft(updateResponse.body.status).toBe(userUpdatedData.status);
 
   //4. get a user detail after update
-  getResponse = await apiHelper.get(
+  getResponse = await goRestApiHelper.get(
     `/public/v2/users/${updatedUserId}`,
     AUTH_HEADER,
   );
@@ -92,12 +92,12 @@ test("update a user test", async ({ apiHelper }) => {
 // GET Call --> verify the User created using /userID
 // PATCH Call- update user details using /userID
 // GET Call --> verify the User updated using /userID
-test("partial update a user test", async ({ apiHelper }) => {
+test("partial update a user test", async ({ goRestApiHelper }) => {
   //1. Create a user
-  let userResponse = await createUser(apiHelper);
+  let userResponse = await createUser(goRestApiHelper);
 
   //2. get a user
-  let getResponse = await apiHelper.get(
+  let getResponse = await goRestApiHelper.get(
     `/public/v2/users/${userResponse.id}`,
     AUTH_HEADER,
   );
@@ -109,7 +109,7 @@ test("partial update a user test", async ({ apiHelper }) => {
     email: `updatedEmail${Date.now()}@mann.test`,
   };
 
-  let partialUpdateResponse = await apiHelper.patch(
+  let partialUpdateResponse = await goRestApiHelper.patch(
     `/public/v2/users/${userResponse.id}`,
     userEmailUpdatedData,
     AUTH_HEADER,
@@ -124,7 +124,7 @@ test("partial update a user test", async ({ apiHelper }) => {
     .toBe(userEmailUpdatedData.email);
 
   //4. get a user detail after update
-  getResponse = await apiHelper.get(
+  getResponse = await goRestApiHelper.get(
     `/public/v2/users/${partialUpdatedUserId}`,
     AUTH_HEADER,
   );
@@ -139,12 +139,12 @@ test("partial update a user test", async ({ apiHelper }) => {
 // GET Call --> verify the User created using /userID
 // DELETE Call- update user details using /userID - 204
 // GET Call --> verify the User updated using /userID - 404
-test("Delete a user test", async ({ apiHelper }) => {
+test("Delete a user test", async ({ goRestApiHelper }) => {
   //1. Create a user
-  let userResponse = await createUser(apiHelper);
+  let userResponse = await createUser(goRestApiHelper);
 
   //2. get a user
-  let getResponse = await apiHelper.get(
+  let getResponse = await goRestApiHelper.get(
     `/public/v2/users/${userResponse.id}`,
     AUTH_HEADER,
   );
@@ -152,14 +152,14 @@ test("Delete a user test", async ({ apiHelper }) => {
   expect(getResponse.body.name).toBe("PW User");
 
   //3. Delete a user details
-  let deleteResponse = await apiHelper.delete(
+  let deleteResponse = await goRestApiHelper.delete(
     `/public/v2/users/${userResponse.id}`,
     AUTH_HEADER,
   );
   expect(deleteResponse.status).toBe(204);
 
   //4. get a user detail after update
-  getResponse = await apiHelper.get(
+  getResponse = await goRestApiHelper.get(
     `/public/v2/users/${userResponse.id}`,
     AUTH_HEADER,
   );

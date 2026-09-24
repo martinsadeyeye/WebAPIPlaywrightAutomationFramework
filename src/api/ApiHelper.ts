@@ -8,7 +8,6 @@ export class ApiHelper {
     this.request = request;
     this.baseURL = baseURL;
   }
-
   //Helper Method
 
   //GET

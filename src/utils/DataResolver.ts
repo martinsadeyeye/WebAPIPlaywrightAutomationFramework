@@ -9,7 +9,7 @@ const countryDataMap: Record<string, string> = {
 };
 
 const schemaDataMap: Record<string, string> = {
-  api: "userSchema.json",
+  qa: "userSchema.json",
 };
 
 export function getCountryDataFilePath(): string {
@@ -34,7 +34,7 @@ export function getSchemaDataFilePath(): string {
   const env = process.env.ENV;
   if (!env) {
     throw new Error(
-      "ENV variable is not set. Use e.g. ENV=api npx playwright test ...",
+      "ENV variable is not set. Use e.g. ENV=qa npx playwright test ...",
     );
   }
 
