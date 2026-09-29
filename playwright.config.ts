@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import reportingLabs from "./reporting-labs.config";
 //npm install dotenv
 //ENV=ug npx playwright test
-const ENV = process.env.ENV || "qa";
+const ENV = (process.env.ENV || "qa").toLowerCase();
 process.env.ENV = ENV; // ensure downstream files see the resolved value
 console.log("Running tests on Environment: ", ENV);
 dotenv.config({ path: `config/.env.${ENV}` });

@@ -11,12 +11,6 @@ const countryDataMap: Record<string, string> = {
 
 const schemaDataMap: Record<string, string> = {
   qa: "userSchema.json",
-  ug: "userSchema.json",
-  ke: "userSchema.json",
-  tz: "userSchema.json",
-  rw: "userSchema.json",
-  drc: "userSchema.json",
-  ss: "userSchema.json",
 };
 
 export function getCountryDataFilePath(): string {
