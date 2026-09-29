@@ -1,4 +1,4 @@
-// src/utils/CountryDataResolver.ts
+// src/utils/DataResolver.ts
 const countryDataMap: Record<string, string> = {
   ug: "uganda.json",
   ke: "kenya.json",
@@ -6,6 +6,7 @@ const countryDataMap: Record<string, string> = {
   rw: "rwanda.json",
   drc: "drc.json",
   ss: "southsudan.json",
+  qa: "uganda.json", // default/fallback when ENV isn't explicitly set to a country
 };
 
 const schemaDataMap: Record<string, string> = {
@@ -19,14 +20,12 @@ export function getCountryDataFilePath(): string {
       "ENV variable is not set. Use e.g. ENV=ug npx playwright test ...",
     );
   }
-
   const fileName = countryDataMap[env];
   if (!fileName) {
     throw new Error(
       `No JSON data file mapped for ENV="${env}". Check countryDataMap.`,
     );
   }
-
   return `src/testData/${fileName}`;
 }
 
@@ -37,13 +36,11 @@ export function getSchemaDataFilePath(): string {
       "ENV variable is not set. Use e.g. ENV=qa npx playwright test ...",
     );
   }
-
   const fileName = schemaDataMap[env];
   if (!fileName) {
     throw new Error(
-      `No JSON data file mapped for ENV="${env}". Check schemaDataMap.`,
+      `No schema file mapped for ENV="${env}". Check schemaDataMap.`,
     );
   }
-
   return `src/schema/${fileName}`;
 }

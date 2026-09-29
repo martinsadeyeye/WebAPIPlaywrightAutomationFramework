@@ -20,24 +20,37 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   timeout: 150000, // for a single test execution
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ["list"],
-    ["html", { outputFolder: "reports/html-report", open: "never" }],
-    [
-      "allure-playwright",
-      {
-        outputFolder: "allure-results",
-        suiteTitle: true,
-      },
-    ],
-    ["reporting-labs", reportingLabs],
-  ],
+  reporter: process.env.CI
+    ? [
+        ["list"],
+        ["html", { outputFolder: "reports/html-report", open: "never" }],
+        [
+          "allure-playwright",
+          {
+            outputFolder: "allure-results",
+            suiteTitle: true,
+          },
+        ],
+        ["reporting-labs", reportingLabs],
+      ]
+    : [
+        ["list"],
+        ["html", { outputFolder: "reports/html-report", open: "never" }],
+        [
+          "allure-playwright",
+          {
+            outputFolder: "allure-results",
+            suiteTitle: true,
+          },
+        ],
+        ["reporting-labs", reportingLabs],
+      ],
 
   use: {
     actionTimeout: 25000,
     navigationTimeout: 20000,
     baseURL: process.env.BASE_URL,
-    headless: false,
+    headless: !process.env.CI ? false : true,
     trace: "on-first-retry",
     video: "on",
   },

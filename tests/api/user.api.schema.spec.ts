@@ -45,7 +45,7 @@ let userArraySchema = {
   items: JsonHelper.readJson<UserSchemaData[]>(getSchemaDataFilePath()),
 };
 
-test("GET a User - Schema test", async ({ apiHelper }) => {
+test("GET a User - Schema test", async ({ goRestApiHelper }) => {
   //User JS Object
   let userData = {
     name: "PW User",
@@ -54,7 +54,7 @@ test("GET a User - Schema test", async ({ apiHelper }) => {
     status: "active",
   };
 
-  let response = await apiHelper.post(
+  let response = await goRestApiHelper.post(
     "/public/v2/users",
     userData,
     AUTH_HEADER,
@@ -65,7 +65,7 @@ test("GET a User - Schema test", async ({ apiHelper }) => {
   console.log("created user id ", UserId);
 
   // get a user
-  let getUserResponse = await apiHelper.get(
+  let getUserResponse = await goRestApiHelper.get(
     `/public/v2/users/${UserId}`,
     AUTH_HEADER,
   );
@@ -83,9 +83,9 @@ test("GET a User - Schema test", async ({ apiHelper }) => {
   expect(isSchemaValid).toBeTruthy();
 });
 
-test("Get all users - Schema Test", async ({ apiHelper }) => {
+test("Get all users - Schema Test", async ({ goRestApiHelper }) => {
   // get a user
-  let getAllUsersResponse = await apiHelper.get(
+  let getAllUsersResponse = await goRestApiHelper.get(
     "/public/v2/users",
     AUTH_HEADER,
   );

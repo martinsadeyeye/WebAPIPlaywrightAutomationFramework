@@ -50,7 +50,6 @@ test("mock search data api", async ({ page }) => {
   await page.goto(
     "https://naveenautomationlabs.com/opencart/index.php?route=product/search&search=macbook",
   );
-  await page.pause();
 });
 
 test("mock search page with fake HTML", async ({ page }) => {
@@ -92,8 +91,6 @@ test("mock search page with fake HTML", async ({ page }) => {
 
   const prices = await page.locator(".price").allTextContents();
   expect(prices).toEqual(["$599", "$999"]);
-
-  await page.pause();
 });
 
 test("UI correctly displays a mocked 401 login error", async ({ page }) => {
