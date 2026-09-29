@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   # schedule:
-  #   - cron: '30 21 * * 1-4' # Mon-Fri 8PM IST
+  #   - cron: '30 21 * * 1-4'  # Mon-Fri 8PM IST
   # push:
   #   branches: [main]
   # pull_request:
@@ -12,14 +12,12 @@ on:
       environment:
         description: 'Select environment'
         required: true
-        default: 'qa'
+        default: 'QA'
         type: choice
         options:
-          - qa
+          - QA
           - stage
           - dev
-          - ke
-          - ug
 
 jobs:
   test:
@@ -54,6 +52,9 @@ jobs:
       - name: Install Playwright OS deps only (if cached)
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
+
+      # reportingLabs run history: powers the Trend chart, new vs known
+      # failures, flaky dots and "got slower". One history per environment.
       - name: Restore reportingLabs history
         uses: actions/cache@v4
         with:
@@ -87,13 +88,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-results-${{ github.run_id }}
-          path: allure-results/  
-          retention-days: 30    
+          path: allure-results/
+          retention-days: 30
 
       - name: Upload reportingLabs Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: reporting-labs-report-${{ github.run_id }}
-          path: reporting-labs/  
-          retention-days: 30    
+          path: reporting-labs/
+          retention-days: 30

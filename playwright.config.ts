@@ -47,12 +47,11 @@ export default defineConfig({
       ],
 
   use: {
-    actionTimeout: 25000,
-    navigationTimeout: 20000,
     baseURL: process.env.BASE_URL,
     headless: !process.env.CI ? false : true,
     trace: "on-first-retry",
-    video: "on",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
   },
 
   /* Configure projects for major browsers */
