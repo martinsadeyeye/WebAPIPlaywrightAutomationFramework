@@ -18,6 +18,8 @@ on:
           - QA
           - stage
           - dev
+          - ke
+          - ug
 
 jobs:
   test:
