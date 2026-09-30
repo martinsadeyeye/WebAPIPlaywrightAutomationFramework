@@ -10,15 +10,15 @@ let userId: number;
 
 test.describe.serial("Running E2E go rest CRUD apis tests", () => {
   //GET
-  test("GET API - get all user", async ({ apiHelper }) => {
-    let response = await apiHelper.get("/public/v2/users", AUTH_HEADER);
+  test("GET API - get all user", async ({ goRestApiHelper }) => {
+    let response = await goRestApiHelper.get("/public/v2/users", AUTH_HEADER);
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
   });
 
   //POST
-  test("POST API - Create a new user", async ({ apiHelper }) => {
+  test("POST API - Create a new user", async ({ goRestApiHelper }) => {
     let userData = {
       name: "PW User",
       email: `pwAutomation_${Date.now()}@mann.dev`,
@@ -26,7 +26,7 @@ test.describe.serial("Running E2E go rest CRUD apis tests", () => {
       status: "active",
     };
 
-    let response = await apiHelper.post(
+    let response = await goRestApiHelper.post(
       "/public/v2/users",
       userData,
       AUTH_HEADER,
@@ -38,7 +38,7 @@ test.describe.serial("Running E2E go rest CRUD apis tests", () => {
   });
 
   //PUT
-  test("PUT API - update a user", async ({ apiHelper }) => {
+  test("PUT API - update a user", async ({ goRestApiHelper }) => {
     let userData = {
       name: "PW User",
       email: `updatedEmail${Date.now()}@mann.test`,
@@ -46,7 +46,7 @@ test.describe.serial("Running E2E go rest CRUD apis tests", () => {
       status: "inactive",
     };
 
-    let response = await apiHelper.put(
+    let response = await goRestApiHelper.put(
       `/public/v2/users/${userId}`,
       userData,
       AUTH_HEADER,
@@ -59,8 +59,8 @@ test.describe.serial("Running E2E go rest CRUD apis tests", () => {
   });
 
   //DELETE
-  test("Delete API - Delete a user", async ({ apiHelper }) => {
-    let response = await apiHelper.delete(
+  test("Delete API - Delete a user", async ({ goRestApiHelper }) => {
+    let response = await goRestApiHelper.delete(
       `/public/v2/users/${userId}`,
       AUTH_HEADER,
     );
