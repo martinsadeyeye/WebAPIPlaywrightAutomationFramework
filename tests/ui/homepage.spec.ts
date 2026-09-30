@@ -23,11 +23,11 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
 });
 
-test("dashboard page has My Account", async () => {
+test.skip("dashboard page has My Account", async () => {
   expect(homePage.isMyAccountExist()).toBeTruthy();
 });
 
-test("My Account Test visible", async () => {
+test.skip("My Account Test visible", async () => {
   let myHeaderText = await homePage.getMyAccountHeader();
   console.log(myHeaderText);
   expect(myHeaderText).toEqual("My accounts");

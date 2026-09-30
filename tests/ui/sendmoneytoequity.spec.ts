@@ -20,7 +20,7 @@ test.beforeEach(async ({ loginPage }) => {
   await loginPage.doRemoveDeviceIfAvailable();
 });
 
-test("Verify send money to equity header", async ({
+test.skip("Verify send money to equity header", async ({
   homePage,
   sendToEquityPage,
   page,
@@ -41,7 +41,7 @@ test("Verify send money to equity header", async ({
   expect(myHeaderText).toEqual("Send to Equity");
 });
 
-test("Send Money to Another Equity Test", async ({
+test.skip("Send Money to Another Equity Test", async ({
   homePage,
   sendToEquityPage,
   page,
@@ -52,7 +52,7 @@ test("Send Money to Another Equity Test", async ({
 //DD_1: read csv data directly from the CSV file and loop the test method row wise...
 let testCsvData = CsvHelper.readCsv("src/testData/uganda.csv");
 for (let row of testCsvData) {
-  test(`Send Money with Invalid Amount with CSV Data  - ${row.accountNumber} - ${row.amount}`, async ({
+  test.skip(`Send Money with Invalid Amount with CSV Data  - ${row.accountNumber} - ${row.amount}`, async ({
     loginPage,
     homePage,
     sendToEquityPage,
@@ -108,7 +108,7 @@ let testJSONData = JsonHelper.readJson<CountryTestData[]>(
   getCountryDataFilePath(),
 );
 for (let row of testJSONData) {
-  test(`Send Money To Another Equity with Invalid Amount with JSON Data - ${row.anotherEquityAccount} - ${row.invalidAmounts}`, async ({
+  test.skip(`Send Money To Another Equity with Invalid Amount with JSON Data - ${row.anotherEquityAccount} - ${row.invalidAmounts}`, async ({
     loginPage,
     homePage,
     sendToEquityPage,

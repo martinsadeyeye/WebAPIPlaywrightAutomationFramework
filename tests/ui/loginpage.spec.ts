@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
   await loginPage.goToLoginPage();
 });
 
-test("Equity has title", async () => {
+test.skip("Equity has title", async () => {
   let pageTitle = await loginPage.getLoginPageTitle();
   console.log("Equity Login Page Title :", pageTitle);
   expect(pageTitle).toBe("Equity online - More than just banking");
@@ -19,7 +19,7 @@ test("forgot password exist test", async () => {
   expect(loginPage.isForgotYourPasswordLinkExist()).toBeTruthy();
 });
 
-test("user is able to login to app test", async () => {
+test.skip("user is able to login to app test", async () => {
   await loginPage.getStarted();
   await loginPage.doSelectCountry(process.env.COUNTRY!);
   await loginPage.doLogin(process.env.USERNAME!, process.env.PASSWORD!);

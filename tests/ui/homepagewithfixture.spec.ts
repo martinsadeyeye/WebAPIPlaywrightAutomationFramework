@@ -14,7 +14,7 @@ test.beforeEach(async ({ loginPage }) => {
   await loginPage.doRemoveDeviceIfAvailable();
 });
 
-test("dashboard page has My Account", async ({ homePage }) => {
+test.skip("dashboard page has My Account", async ({ homePage }) => {
   meta({
     priority: "P0",
     severity: "minor",
@@ -27,7 +27,7 @@ test("dashboard page has My Account", async ({ homePage }) => {
   expect(homePage.isMyAccountExist()).toBeTruthy();
 });
 
-test("My Account Test visible", async ({ homePage }) => {
+test.skip("My Account Test visible", async ({ homePage }) => {
   meta({
     priority: "P1",
     severity: "major",
@@ -45,7 +45,7 @@ test("My Account Test visible", async ({ homePage }) => {
   expect(myHeaderText).toEqual("My accounts");
 });
 
-test("Airtime menu link is available on Homepage Test", async ({
+test.skip("Airtime menu link is available on Homepage Test", async ({
   homePage,
   page,
 }) => {

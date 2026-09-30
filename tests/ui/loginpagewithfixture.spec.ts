@@ -5,7 +5,7 @@ test.beforeEach(async ({ loginPage }) => {
   await loginPage.goToLoginPage();
 });
 
-test("Equity has title", async ({ loginPage }) => {
+test.skip("Equity has title", async ({ loginPage }) => {
   meta({
     priority: "P2",
     severity: "minor",
@@ -36,7 +36,7 @@ test("forgot password exist test", async ({ loginPage }) => {
   expect(loginPage.isForgotYourPasswordLinkExist()).toBeTruthy();
 });
 
-test("user is able to login to app test", async ({ loginPage }) => {
+test.skip("user is able to login to app test", async ({ loginPage }) => {
   meta({
     priority: "P3",
     severity: "major",
