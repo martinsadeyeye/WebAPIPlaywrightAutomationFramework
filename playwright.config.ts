@@ -47,7 +47,7 @@ export default defineConfig({
       ],
 
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.WEB_BASE_URL,
     headless: !process.env.CI ? false : true,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
