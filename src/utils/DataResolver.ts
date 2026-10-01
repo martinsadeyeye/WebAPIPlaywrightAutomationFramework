@@ -7,6 +7,9 @@ const countryDataMap: Record<string, string> = {
   drc: "drc.json",
   ss: "southsudan.json",
   qa: "uganda.json", // default/fallback when ENV isn't explicitly set to a country
+  dev: "kenya.json",
+  stage: "kenya.json",
+  prod: "kenya.json",
 };
 
 const schemaDataMap: Record<string, string> = {
