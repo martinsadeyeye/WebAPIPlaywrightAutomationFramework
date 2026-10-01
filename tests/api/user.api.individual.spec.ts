@@ -29,7 +29,7 @@ async function createUser(goRestApiHelper: any) {
 //Test case 1: create a user test + verify : AAA
 // POST call --> Retrieve the USER ID ---
 // GET Call --> verify the User created
-test("Create a user test", async ({ goRestApiHelper }) => {
+test("@regression Create a user test", async ({ goRestApiHelper }) => {
   //Create a user
   let userResponse = await createUser(goRestApiHelper);
 
@@ -47,7 +47,7 @@ test("Create a user test", async ({ goRestApiHelper }) => {
 // GET Call --> verify the User created using /userID
 // PUT Call- update user details using /userID
 // GET Call --> verify the User updated using /userID
-test("update a user test", async ({ goRestApiHelper }) => {
+test("@regression update a user test", async ({ goRestApiHelper }) => {
   //1. Create a user
   let userResponse = await createUser(goRestApiHelper);
 
@@ -92,7 +92,7 @@ test("update a user test", async ({ goRestApiHelper }) => {
 // GET Call --> verify the User created using /userID
 // PATCH Call- update user details using /userID
 // GET Call --> verify the User updated using /userID
-test("partial update a user test", async ({ goRestApiHelper }) => {
+test("@regression partial update a user test", async ({ goRestApiHelper }) => {
   //1. Create a user
   let userResponse = await createUser(goRestApiHelper);
 
@@ -139,7 +139,7 @@ test("partial update a user test", async ({ goRestApiHelper }) => {
 // GET Call --> verify the User created using /userID
 // DELETE Call- update user details using /userID - 204
 // GET Call --> verify the User updated using /userID - 404
-test("Delete a user test", async ({ goRestApiHelper }) => {
+test("@regression Delete a user test", async ({ goRestApiHelper }) => {
   //1. Create a user
   let userResponse = await createUser(goRestApiHelper);
 

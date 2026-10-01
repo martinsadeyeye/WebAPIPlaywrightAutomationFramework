@@ -59,6 +59,6 @@ test.skip("user is able to login to app test", async ({ loginPage }) => {
 });
 
 // common feature test
-test("App logo exist on onboard page", async ({ basePage }) => {
+test("@smoke App logo exist on onboard page", async ({ basePage }) => {
   expect(basePage.isLogoVisible()).toBeTruthy();
 });
