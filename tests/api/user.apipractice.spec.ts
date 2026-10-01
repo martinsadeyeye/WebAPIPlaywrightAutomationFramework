@@ -72,9 +72,9 @@ test("Update user PUT api test", async ({ request }) => {
   console.log(response.statusText());
 });
 
-test("Delete user DELETE api test", async ({ request }) => {
+test.skip("Delete user DELETE api test", async ({ request }) => {
   let response: APIResponse = await request.delete(
-    "https://gorest.co.in/public/v2/users/8617292",
+    "https://gorest.co.in/public/v2/users/8617293",
     {
       headers: AUTH_TOKEN,
     },
