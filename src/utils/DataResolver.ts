@@ -10,7 +10,10 @@ const countryDataMap: Record<string, string> = {
 };
 
 const schemaDataMap: Record<string, string> = {
+  dev: "userSchema.json",
   qa: "userSchema.json",
+  stage: "userSchema.json",
+  prod: "userSchema.json",
 };
 
 export function getCountryDataFilePath(): string {
