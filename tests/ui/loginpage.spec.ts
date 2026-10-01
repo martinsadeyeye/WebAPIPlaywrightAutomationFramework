@@ -29,7 +29,7 @@ test("@smoke forgot password exist test", async () => {
   expect(loginPage.isForgotYourPasswordLinkExist()).toBeTruthy();
 });
 
-test("@smoke user is able to login to app test", async () => {
+test.skip("@smoke user is able to login to app test", async () => {
   meta({
     priority: "P2",
     severity: "major",

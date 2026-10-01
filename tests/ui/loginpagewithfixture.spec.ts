@@ -22,7 +22,7 @@ test.skip("Equity has title", async ({ loginPage }) => {
   expect(pageTitle).toBe("Equity online - More than just banking");
 });
 
-test("forgot password exist test", async ({ loginPage }) => {
+test("@regression forgot password exist test", async ({ loginPage }) => {
   meta({
     priority: "P1",
     severity: "blocker",
