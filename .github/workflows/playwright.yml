@@ -67,9 +67,11 @@ jobs:
         run: npx playwright test --project=chromium
         env:
           ENV: ${{ github.event.inputs.environment || 'qa' }}
-          BASE_URL: ${{ secrets.WEB_BASE_URL }}
+          WEB_BASE_URL: ${{ secrets.WEB_BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          BOOKER_API_BASE_URL: ${{ secrets.BOOKER_API_BASE_URL }}
+          GO_REST_API_BASE_URL: ${{ secrets.GO_REST_API_BASE_URL }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
