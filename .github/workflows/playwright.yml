@@ -24,7 +24,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    environment: ${{ github.event.inputs.environment || 'QA' }}
+    environment: ${{ github.event.inputs.environment || 'qa' }}
 
     steps:
       - name: Checkout code
@@ -60,14 +60,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: reporting-labs.history.json
-          key: reporting-labs-history-${{ github.event.inputs.environment || 'QA' }}-${{ github.run_id }}
-          restore-keys: reporting-labs-history-${{ github.event.inputs.environment || 'QA' }}-
+          key: reporting-labs-history-${{ github.event.inputs.environment || 'qa' }}-${{ github.run_id }}
+          restore-keys: reporting-labs-history-${{ github.event.inputs.environment || 'qa' }}-
 
       - name: Run tests
         run: npx playwright test --project=chromium
         env:
-          ENV: ${{ github.event.inputs.environment || 'QA' }}
-          BASE_URL: ${{ secrets.BASE_URL }}
+          ENV: ${{ github.event.inputs.environment || 'qa' }}
+          BASE_URL: ${{ secrets.WEB_BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
