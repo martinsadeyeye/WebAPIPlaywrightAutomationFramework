@@ -11,9 +11,7 @@ dotenv.config({ path: `config/.env.${ENV}` });
 if (!process.env.WEB_BASE_URL) {
   throw new Error("WEB_BASE_URL must be set in environment variables");
 }
-if (!process.env.API_BASE_URL) {
-  throw new Error("API_BASE_URL must be set in environment variables");
-}
+
 
 export default defineConfig({
   testDir: "./tests",
