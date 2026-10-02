@@ -1,0 +1,16 @@
+POST → https://gorest.co.in/public/v2/users
+{
+  id: 8645902,
+  name: 'PW User',
+  email: 'pwAutomation_1790906269928@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 201
+GET → https://gorest.co.in/public/v2/users/8645902
+{
+  id: 8645902,
+  name: 'PW User',
+  email: 'pwAutomation_1790906269928@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 200
