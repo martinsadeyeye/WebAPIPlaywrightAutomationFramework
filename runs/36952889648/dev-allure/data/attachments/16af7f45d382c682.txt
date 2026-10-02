@@ -1,0 +1,73 @@
+GET → https://gorest.co.in/public/v2/users
+[
+  {
+    id: 8645855,
+    name: 'Udai Rana',
+    email: 'udai_rana@jerde-mcdermott.example',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645854,
+    name: 'Meghnad Deshpande',
+    email: 'meghnad_deshpande@russel-durgan.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8645853,
+    name: 'Dayaananda Prajapat',
+    email: 'dayaananda_prajapat@buckridge.example',
+    gender: 'female',
+    status: 'active'
+  },
+  {
+    id: 8645852,
+    name: 'Bhishma Sharma',
+    email: 'bhishma_sharma@russel.example',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645851,
+    name: 'Som Reddy DO',
+    email: 'reddy_do_som@gutmann-barrows.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8645850,
+    name: 'Sen. Dron Joshi',
+    email: 'joshi_sen_dron@predovic.test',
+    gender: 'female',
+    status: 'active'
+  },
+  {
+    id: 8645849,
+    name: 'Dipankar Banerjee',
+    email: 'dipankar_banerjee@feeney-mante.test',
+    gender: 'female',
+    status: 'inactive'
+  },
+  {
+    id: 8645847,
+    name: 'manish',
+    email: 'pwautomation_1790902794527@open.com',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645846,
+    name: 'apiautomation-update',
+    email: 'apiautomation_1790902792392@open.com',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8645844,
+    name: 'apiautomation',
+    email: 'apiautomation_1790902791480@open.com',
+    gender: 'male',
+    status: 'active'
+  }
+] 200
