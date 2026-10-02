@@ -1,6 +1,6 @@
 # ═══════════════════════════════════════════════════════════════
 # FILE: .github/workflows/master-pipeline.yml
-# REPO: naveenanimation20/OpenCartWebAPIAutomationFramework
+# REPO: martinsadeyeye/WebAPIPlaywrightAutomationFramework
 # DEV REPO: jglick/simple-maven-project-with-tests
 # ═══════════════════════════════════════════════════════════════
 # "Run up to environment" — the dropdown controls how far the
@@ -19,13 +19,13 @@ on:
       environment:
         description: 'Run up to environment'
         required: true
-        default: 'QA'
+        default: 'qa'
         type: choice
         options:
           - dev
-          - QA
+          - qa
           - stage
-          - Prod
+          - prod
 
 jobs:
 
@@ -85,7 +85,7 @@ jobs:
       - name: Checkout QA repo
         uses: actions/checkout@v4
         with:
-          repository: naveenanimation20/OpenCartWebAPIAutomationFramework
+          repository: martinsadeyeye/WebAPIPlaywrightAutomationFramework
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -126,9 +126,11 @@ jobs:
           npx playwright test --project=chromium --grep @smoke
         env:
           ENV: dev
-          BASE_URL: ${{ secrets.BASE_URL }}
+          WEB_BASE_URL: ${{ secrets.WEB_BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          BOOKER_API_BASE_URL: ${{ secrets.BOOKER_API_BASE_URL }}
+          GO_REST_API_BASE_URL: ${{ secrets.GO_REST_API_BASE_URL }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
@@ -172,7 +174,7 @@ jobs:
   deploy-qa:
     name: Deploy to QA
     needs: sanity-dev
-    if: contains(fromJSON('["QA","stage","Prod"]'), github.event.inputs.environment)
+    if: contains(fromJSON('["qa","stage","prod"]'), github.event.inputs.environment)
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to QA
@@ -181,14 +183,14 @@ jobs:
   regression-qa:
     name: QA - Regression Tests
     needs: deploy-qa
-    if: contains(fromJSON('["QA","stage","Prod"]'), github.event.inputs.environment)
+    if: contains(fromJSON('["qa","stage","prod"]'), github.event.inputs.environment)
     runs-on: ubuntu-latest
     environment: QA
     steps:
       - name: Checkout QA repo
         uses: actions/checkout@v4
         with:
-          repository: naveenanimation20/OpenCartWebAPIAutomationFramework
+          repository: martinsadeyeye/WebAPIPlaywrightAutomationFramework
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -229,9 +231,11 @@ jobs:
           npx playwright test --project=chromium --grep @regression
         env:
           ENV: qa
-          BASE_URL: ${{ secrets.BASE_URL }}
+          WEB_BASE_URL: ${{ secrets.WEB_BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          BOOKER_API_BASE_URL: ${{ secrets.BOOKER_API_BASE_URL }}
+          GO_REST_API_BASE_URL: ${{ secrets.GO_REST_API_BASE_URL }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
@@ -275,7 +279,7 @@ jobs:
   deploy-stage:
     name: Deploy to STAGE
     needs: regression-qa
-    if: contains(fromJSON('["stage","Prod"]'), github.event.inputs.environment)
+    if: contains(fromJSON('["stage","prod"]'), github.event.inputs.environment)
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to STAGE
@@ -284,14 +288,14 @@ jobs:
   sanity-stage:
     name: STAGE - Sanity Tests
     needs: deploy-stage
-    if: contains(fromJSON('["stage","Prod"]'), github.event.inputs.environment)
+    if: contains(fromJSON('["stage","prod"]'), github.event.inputs.environment)
     runs-on: ubuntu-latest
     environment: stage
     steps:
       - name: Checkout QA repo
         uses: actions/checkout@v4
         with:
-          repository: naveenanimation20/OpenCartWebAPIAutomationFramework
+          repository: martinsadeyeye/WebAPIPlaywrightAutomationFramework
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -332,9 +336,11 @@ jobs:
           npx playwright test --project=chromium --grep @smoke
         env:
           ENV: stage
-          BASE_URL: ${{ secrets.BASE_URL }}
+          WEB_BASE_URL: ${{ secrets.WEB_BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          BOOKER_API_BASE_URL: ${{ secrets.BOOKER_API_BASE_URL }}
+          GO_REST_API_BASE_URL: ${{ secrets.GO_REST_API_BASE_URL }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
@@ -378,7 +384,7 @@ jobs:
   deploy-prod:
     name: Deploy to PROD
     needs: sanity-stage
-    if: github.event.inputs.environment == 'Prod'
+    if: github.event.inputs.environment == 'prod'
     runs-on: ubuntu-latest
     environment: Prod
     steps:
@@ -388,14 +394,14 @@ jobs:
   smoke-prod:
     name: PROD - Smoke Tests
     needs: deploy-prod
-    if: github.event.inputs.environment == 'Prod'
+    if: github.event.inputs.environment == 'prod'
     runs-on: ubuntu-latest
-    environment: Prod
+    environment: prod
     steps:
       - name: Checkout QA repo
         uses: actions/checkout@v4
         with:
-          repository: naveenanimation20/OpenCartWebAPIAutomationFramework
+          repository: martinsadeyeye/WebAPIPlaywrightAutomationFramework
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -436,9 +442,11 @@ jobs:
           npx playwright test --project=chromium --grep @smoke
         env:
           ENV: prod
-          BASE_URL: ${{ secrets.BASE_URL }}
+          WEB_BASE_URL: ${{ secrets.WEB_BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          BOOKER_API_BASE_URL: ${{ secrets.BOOKER_API_BASE_URL }}
+          GO_REST_API_BASE_URL: ${{ secrets.GO_REST_API_BASE_URL }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}

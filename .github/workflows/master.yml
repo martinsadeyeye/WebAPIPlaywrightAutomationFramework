@@ -102,6 +102,13 @@ jobs:
         if: steps.pw-cache-dev.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+     - name: Restore reportingLabs history
+        uses: actions/cache@v4
+        with:
+          path: reporting-labs.history.json
+          key: reporting-labs-history-dev-${{ github.run_id }}
+          restore-keys: reporting-labs-history-dev-
+
       - name: Run Sanity Tests on DEV
         run: |
           echo "========================================="
@@ -141,6 +148,14 @@ jobs:
         with:
           name: dev-sanity-allure-report
           path: allure-report/
+          retention-days: 30
+
+      - name: Upload DEV reportingLabs Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dev-sanity-reportinglabs-report
+          path: reporting-labs/
           retention-days: 30
 
   # ═════════════════════════════════════════════════════
@@ -189,6 +204,14 @@ jobs:
         if: steps.pw-cache-qa.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Restore reportingLabs history
+        uses: actions/cache@v4
+        with:
+          path: reporting-labs.history.json
+          key: reporting-labs-history-qa-${{ github.run_id }}
+          restore-keys: reporting-labs-history-qa-
+
+
       - name: Run Regression Tests on QA
         run: |
           echo "========================================="
@@ -229,7 +252,14 @@ jobs:
           name: qa-regression-allure-report
           path: allure-report/
           retention-days: 30
-
+          
+      - name: Upload QA reportingLabs Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-regression-reportinglabs-report
+          path: reporting-labs/
+          retention-days: 30
   # ═════════════════════════════════════════════════════
   # STEP 4: DEPLOY STAGE + SANITY TESTS
   # ═════════════════════════════════════════════════════
@@ -276,6 +306,13 @@ jobs:
         if: steps.pw-cache-stage.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Restore reportingLabs history
+        uses: actions/cache@v4
+        with:
+          path: reporting-labs.history.json
+          key: reporting-labs-history-stage-${{ github.run_id }}
+          restore-keys: reporting-labs-history-stage-
+
       - name: Run Sanity Tests on STAGE
         run: |
           echo "========================================="
@@ -317,6 +354,13 @@ jobs:
           path: allure-report/
           retention-days: 30
 
+      - name: Upload STAGE reportingLabs Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-sanity-reportinglabs-report
+          path: reporting-labs/
+          retention-days: 30
   # ═════════════════════════════════════════════════════
   # STEP 5: DEPLOY PROD + SMOKE TESTS
   # ═════════════════════════════════════════════════════
@@ -364,6 +408,13 @@ jobs:
         if: steps.pw-cache-prod.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Restore reportingLabs history
+        uses: actions/cache@v4
+        with:
+          path: reporting-labs.history.json
+          key: reporting-labs-history-prod-${{ github.run_id }}
+          restore-keys: reporting-labs-history-prod-
+
       - name: Run Smoke Tests on PROD
         run: |
           echo "========================================="
@@ -403,6 +454,14 @@ jobs:
         with:
           name: prod-smoke-allure-report
           path: allure-report/
+          retention-days: 30
+
+      - name: Upload PROD reportingLabs Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-smoke-reportinglabs-report
+          path: reporting-labs/
           retention-days: 30
 
   # ═════════════════════════════════════════════════════
