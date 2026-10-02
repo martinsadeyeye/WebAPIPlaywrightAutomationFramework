@@ -1,0 +1,73 @@
+GET → https://gorest.co.in/public/v2/users
+[
+  {
+    id: 8645948,
+    name: 'PW User',
+    email: 'updatedEmail1790909316374@mann.test',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645947,
+    name: 'PW User',
+    email: 'pwAutomation_1790909314802@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645946,
+    name: 'PW1 User1',
+    email: 'updatedEmail1790909314780@mann.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8645925,
+    name: 'PW User',
+    email: 'updatedEmail1790908536108@mann.test',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645922,
+    name: 'PW1 User1',
+    email: 'updatedEmail1790908533070@mann.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8645923,
+    name: 'PW User',
+    email: 'pwAutomation_1790908530971@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645903,
+    name: 'PW User',
+    email: 'updatedEmail1790906272272@mann.test',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645901,
+    name: 'PW1 User1',
+    email: 'updatedEmail1790906271533@mann.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8645902,
+    name: 'PW User',
+    email: 'pwAutomation_1790906269928@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8645896,
+    name: 'PW User',
+    email: 'updatedEmail1790906046436@mann.test',
+    gender: 'male',
+    status: 'active'
+  }
+] 200

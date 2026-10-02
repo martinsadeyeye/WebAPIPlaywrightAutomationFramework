@@ -1,0 +1,2 @@
+POST → https://gorest.co.in/public/v2/users
+[ { field: 'email', message: 'has already been taken' } ] 422

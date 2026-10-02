@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","7320","@smoke forgot password exist test","chromium","2026-10-02","passed","2026-10-02","","ui/loginpage.spec.ts","",""
+"","2890","@smoke App logo exist on onboard page","chromium","2026-10-02","passed","2026-10-02","","ui/loginpagewithfixture.spec.ts","",""
+"","1","@smoke user is able to login to app test","chromium","2026-10-02","skipped","2026-10-02","","ui/loginpage.spec.ts","",""
+"","1385","@smoke @regression GET API - get all user","chromium","2026-10-02","passed","2026-10-02","Running E2E go rest CRUD apis tests","api/user.api.spec.ts","",""
