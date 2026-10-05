@@ -10,9 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Run up to environment'
+        description: "Run up to environment"
         required: true
-        default: 'qa'
+        default: "qa"
         type: choice
         options:
           - dev
@@ -21,7 +21,6 @@ on:
           - prod
 
 jobs:
-
   # ═════════════════════════════════════════════════════
   # STEP 1: BUILD APP + UNIT TESTS (DEV REPO - MAVEN)
   # ═════════════════════════════════════════════════════
@@ -37,9 +36,9 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'maven'
+          distribution: "temurin"
+          java-version: "17"
+          cache: "maven"
 
       - name: Build & Run Unit Tests
         run: |
@@ -82,7 +81,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
+          cache: "npm"
 
       - name: Cache Playwright browsers
         id: pw-cache-dev
@@ -101,8 +100,7 @@ jobs:
       - name: Install Playwright OS deps only
         if: steps.pw-cache-dev.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
-
-     - name: Restore reportingLabs history
+      - name: Restore reportingLabs history
         uses: actions/cache@v4
         with:
           path: reporting-labs.history.json
@@ -184,7 +182,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
+          cache: "npm"
 
       - name: Cache Playwright browsers
         id: pw-cache-qa
@@ -210,7 +208,6 @@ jobs:
           path: reporting-labs.history.json
           key: reporting-labs-history-qa-${{ github.run_id }}
           restore-keys: reporting-labs-history-qa-
-
 
       - name: Run Regression Tests on QA
         run: |
@@ -252,7 +249,7 @@ jobs:
           name: qa-regression-allure-report
           path: allure-report/
           retention-days: 30
-          
+
       - name: Upload QA reportingLabs Report
         if: always()
         uses: actions/upload-artifact@v4
@@ -286,7 +283,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
+          cache: "npm"
 
       - name: Cache Playwright browsers
         id: pw-cache-stage
@@ -388,7 +385,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
+          cache: "npm"
 
       - name: Cache Playwright browsers
         id: pw-cache-prod
