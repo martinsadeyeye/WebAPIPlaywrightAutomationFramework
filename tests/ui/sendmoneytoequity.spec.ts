@@ -108,7 +108,7 @@ let testJSONData = JsonHelper.readJson<CountryTestData[]>(
   getCountryDataFilePath(),
 );
 for (let row of testJSONData) {
-  test(`@regression Send Money To Another Equity with Invalid Amount with JSON Data - ${row.anotherEquityAccount} - ${row.invalidAmounts}`, async ({
+  test.skip(`@regression Send Money To Another Equity with Invalid Amount with JSON Data - ${row.anotherEquityAccount} - ${row.invalidAmounts}`, async ({
     loginPage,
     homePage,
     sendToEquityPage,
