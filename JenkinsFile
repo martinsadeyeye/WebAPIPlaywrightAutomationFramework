@@ -6,7 +6,7 @@
 // Reports per stage (3 reports × 4 envs = 12 total):
 //   1. PW HTML Report    → reports-{env}/html/
 //   2. Allure Report     → reports-{env}/allure/
-//   3. ReportingLabs     → reports-{env}/reportinglabs/
+//   3. ReportingLabs     → reports-{env}/reportinglabs/.    
 // ═══════════════════════════════════════════════════════════════
 
 pipeline {
