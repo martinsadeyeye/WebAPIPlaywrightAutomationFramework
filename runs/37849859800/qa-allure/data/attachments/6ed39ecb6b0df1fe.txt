@@ -1,0 +1,9 @@
+POST → https://gorest.co.in/public/v2/users
+{
+  id: 8656998,
+  name: 'PW User',
+  email: 'pwAutomation_1791496504190@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 201
+8656998

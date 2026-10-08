@@ -1,0 +1,8 @@
+PUT → https://gorest.co.in/public/v2/users/8656998
+{
+  id: 8656998,
+  name: 'PW User',
+  email: 'updatedEmail1791496504608@mann.test',
+  gender: 'male',
+  status: 'inactive'
+} 200

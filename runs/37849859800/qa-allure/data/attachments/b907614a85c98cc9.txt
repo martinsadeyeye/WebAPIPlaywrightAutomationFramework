@@ -1,0 +1,20 @@
+POST → https://gorest.co.in/public/v2/users
+{
+  id: 8656997,
+  name: 'PW User',
+  email: 'pwAutomation_1791496502884@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 201
+GET → https://gorest.co.in/public/v2/users/8656997
+{
+  id: 8656997,
+  name: 'PW User',
+  email: 'pwAutomation_1791496502884@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 200
+DELETE → https://gorest.co.in/public/v2/users/8656997
+204
+GET → https://gorest.co.in/public/v2/users/8656997
+{ message: 'Resource not found' } 404

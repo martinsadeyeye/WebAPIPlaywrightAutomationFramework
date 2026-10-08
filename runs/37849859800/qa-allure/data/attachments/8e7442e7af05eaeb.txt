@@ -1,0 +1,31 @@
+POST → https://gorest.co.in/public/v2/users
+{
+  id: 8656996,
+  name: 'PW User',
+  email: 'pwAutomation_1791496502135@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 201
+GET → https://gorest.co.in/public/v2/users/8656996
+{
+  id: 8656996,
+  name: 'PW User',
+  email: 'pwAutomation_1791496502135@mann.dev',
+  gender: 'male',
+  status: 'active'
+} 200
+{
+  id: 8656996,
+  name: 'PW User',
+  email: 'updatedEmail1791496502958@mann.test',
+  gender: 'male',
+  status: 'active'
+} 200
+GET → https://gorest.co.in/public/v2/users/8656996
+{
+  id: 8656996,
+  name: 'PW User',
+  email: 'updatedEmail1791496502958@mann.test',
+  gender: 'male',
+  status: 'active'
+} 200
