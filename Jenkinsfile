@@ -124,8 +124,8 @@ pipeline {
                             USERNAME=$USERNAME \
                             PASSWORD=$PASSWORD \
                             API_BASE_URL=$API_BASE_URL \
-                            BOOKER_API_BASE_URL=$API_BASE_URL \
-                            GO_REST_API_BASE_URL=$API_BASE_URL \
+                            BOOKER_API_BASE_URL=$BOOKER_API_BASE_URL \
+                            GO_REST_API_BASE_URL=$GO_REST_API_BASE_URL \
                             API_TOKEN=$API_TOKEN \
                             OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID \
                             OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET \
@@ -202,8 +202,8 @@ pipeline {
                             USERNAME=$USERNAME \
                             PASSWORD=$PASSWORD \
                             API_BASE_URL=$API_BASE_URL \
-                            BOOKER_API_BASE_URL=$API_BASE_URL \
-                            GO_REST_API_BASE_URL=$API_BASE_URL \
+                            BOOKER_API_BASE_URL=$BOOKER_API_BASE_URL \
+                            GO_REST_API_BASE_URL=$GO_REST_API_BASE_URL \
                             API_TOKEN=$API_TOKEN \
                             OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID \
                             OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET \
@@ -280,8 +280,8 @@ pipeline {
                             USERNAME=$USERNAME \
                             PASSWORD=$PASSWORD \
                             API_BASE_URL=$API_BASE_URL \
-                            BOOKER_API_BASE_URL=$API_BASE_URL \
-                            GO_REST_API_BASE_URL=$API_BASE_URL \
+                            BOOKER_API_BASE_URL=$BOOKER_API_BASE_URL \
+                            GO_REST_API_BASE_URL=$GO_REST_API_BASE_URL \
                             API_TOKEN=$API_TOKEN \
                             OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID \
                             OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET \
@@ -366,8 +366,8 @@ pipeline {
                             USERNAME=$USERNAME \
                             PASSWORD=$PASSWORD \
                             API_BASE_URL=$API_BASE_URL \
-                            BOOKER_API_BASE_URL=$API_BASE_URL \
-                            GO_REST_API_BASE_URL=$API_BASE_URL \
+                            BOOKER_API_BASE_URL=$BOOKER_API_BASE_URL \
+                            GO_REST_API_BASE_URL=$GO_REST_API_BASE_URL \
                             API_TOKEN=$API_TOKEN \
                             OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID \
                             OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET \
