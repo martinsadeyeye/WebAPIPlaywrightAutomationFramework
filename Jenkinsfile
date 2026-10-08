@@ -81,7 +81,7 @@ pipeline {
                 echo "========================================="
                 dir('qa-tests') {
                     git url: 'https://github.com/martinsadeyeye/WebAPIPlaywrightAutomationFramework.git',
-                        branch: 'main'
+                        branch: 'master'
                     sh 'npm ci'
                     sh 'npx playwright install --with-deps chromium'
                 }
@@ -428,7 +428,7 @@ pipeline {
 
 *Overall: ${statusEmoji} ${buildStatus}*
 *Environment:* `${params.ENVIRONMENT}`
-*Branch:* `${env.BRANCH_NAME ?: 'main'}`
+*Branch:* `${env.BRANCH_NAME ?: 'master'}`
 *Build:* #${env.BUILD_NUMBER}
 *Duration:* ${currentBuild.durationString.replace(' and counting', '')}
 
