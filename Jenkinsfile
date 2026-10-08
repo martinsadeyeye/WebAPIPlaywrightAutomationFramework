@@ -329,7 +329,7 @@ pipeline {
             steps {
                 input message: 'Deploy to PROD?',
                     ok: 'Yes, Deploy!',
-                    submitter: 'admin,martins'
+                    submitter: 'admin,naveen'
             }
         }
 
