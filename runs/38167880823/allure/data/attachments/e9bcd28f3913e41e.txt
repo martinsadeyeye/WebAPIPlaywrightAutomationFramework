@@ -1,0 +1,11 @@
+GET https://naveenautomationlabs.com/opencart/index.php?route=account/login
+GET https://naveenautomationlabs.com/opencart/catalog/view/javascript/jquery/jquery-3.7.0.min.js
+GET https://naveenautomationlabs.com/opencart/catalog/view/javascript/bootstrap/css/bootstrap.min.css
+GET https://naveenautomationlabs.com/opencart/catalog/view/javascript/bootstrap/js/bootstrap.min.js
+GET https://naveenautomationlabs.com/opencart/catalog/view/javascript/font-awesome/css/font-awesome.min.css
+GET https://fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700
+GET https://naveenautomationlabs.com/opencart/catalog/view/theme/default/stylesheet/stylesheet.css
+GET https://naveenautomationlabs.com/opencart/catalog/view/javascript/common.js
+GET https://naveenautomationlabs.com/opencart/image/catalog/opencart-logo.png
+GET https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2
+GET https://naveenautomationlabs.com/opencart/catalog/view/javascript/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0

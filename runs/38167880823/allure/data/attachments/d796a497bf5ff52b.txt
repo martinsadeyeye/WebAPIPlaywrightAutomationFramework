@@ -1,0 +1,33 @@
+POST → https://restful-booker.herokuapp.com/auth
+{ token: '5d75d57c0a33452' } 200
+New Token:  5d75d57c0a33452
+POST → https://restful-booker.herokuapp.com/booking
+{
+  bookingid: 2085,
+  booking: {
+    firstname: 'Seun',
+    lastname: 'Brown',
+    totalprice: 111,
+    depositpaid: true,
+    bookingdates: { checkin: '2027-01-01', checkout: '2027-01-01' },
+    additionalneeds: 'Breakfast'
+  }
+} 200
+GET → https://restful-booker.herokuapp.com/booking/2085
+{
+  firstname: 'Seun',
+  lastname: 'Brown',
+  totalprice: 111,
+  depositpaid: true,
+  bookingdates: { checkin: '2027-01-01', checkout: '2027-01-01' },
+  additionalneeds: 'Breakfast'
+} 200
+PUT → https://restful-booker.herokuapp.com/booking/2085
+{
+  firstname: 'James',
+  lastname: 'Brown',
+  totalprice: 111,
+  depositpaid: true,
+  bookingdates: { checkin: '2018-01-01', checkout: '2019-01-01' },
+  additionalneeds: 'Breakfast'
+} 200

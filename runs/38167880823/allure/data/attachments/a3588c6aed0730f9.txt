@@ -1,0 +1,74 @@
+[
+  {
+    id: 8662704,
+    name: 'PW User',
+    email: 'pwAutomation_1791746704416@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662703,
+    name: 'PW User',
+    email: 'pwAutomation_1791746704820@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662701,
+    name: 'PW User',
+    email: 'updatedEmail1791746703511@mann.test',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662700,
+    name: 'PW1 User1',
+    email: 'updatedEmail1791746702654@mann.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8662699,
+    name: 'PW User',
+    email: 'pwAutomation_1791746700443@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662697,
+    name: 'PW User',
+    email: 'pwautomation_1791746020952@mann.test',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662695,
+    name: 'PW User',
+    email: 'pwAutomation_1791746016878@mann.dev',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662693,
+    name: 'PW User',
+    email: 'updatedEmail1791746014471@mann.test',
+    gender: 'male',
+    status: 'active'
+  },
+  {
+    id: 8662692,
+    name: 'PW1 User1',
+    email: 'updatedEmail1791746012740@mann.test',
+    gender: 'male',
+    status: 'inactive'
+  },
+  {
+    id: 8662691,
+    name: 'PW User',
+    email: 'pwAutomation_1791746010510@mann.dev',
+    gender: 'male',
+    status: 'active'
+  }
+]
+200
+OK

@@ -1,0 +1,13 @@
+POST → https://restful-booker.herokuapp.com/booking
+{
+  bookingid: 2084,
+  booking: {
+    firstname: 'Seun',
+    lastname: 'Brown',
+    totalprice: 111,
+    depositpaid: true,
+    bookingdates: { checkin: '2027-01-01', checkout: '2027-01-01' },
+    additionalneeds: 'Breakfast'
+  }
+} 200
+New Booking Id:  2084

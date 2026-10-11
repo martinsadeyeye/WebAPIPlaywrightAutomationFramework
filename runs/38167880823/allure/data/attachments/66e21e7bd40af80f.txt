@@ -1,0 +1,46 @@
+POST → https://thinking-tester-contact-list.herokuapp.com/users/login
+{
+  user: {
+    _id: '6aae9396c601110015a5152d',
+    firstName: 'Femi',
+    lastName: 'Martins',
+    email: 'adeyeye079@gmail.com',
+    __v: 235
+  },
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YWFlOTM5NmM2MDExMTAwMTVhNTE1MmQiLCJpYXQiOjE3OTE3NDY3MDF9.1jfgMibruTRqxYnAvqbvs9FuIy8yD8Y_X0Xk1HY-SXs'
+} 200
+Token Generated:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YWFlOTM5NmM2MDExMTAwMTVhNTE1MmQiLCJpYXQiOjE3OTE3NDY3MDF9.1jfgMibruTRqxYnAvqbvs9FuIy8yD8Y_X0Xk1HY-SXs
+POST → https://thinking-tester-contact-list.herokuapp.com/contacts
+{
+  _id: '6acbe28ed52a6c001565e06a',
+  firstName: 'John',
+  lastName: 'Doe',
+  birthdate: '1970-01-01',
+  email: 'jdoe@fake.com',
+  phone: '8005555555',
+  street1: '1 Main St.',
+  street2: 'Apartment A',
+  city: 'New York',
+  stateProvince: 'KS',
+  postalCode: '12345',
+  country: 'USA',
+  owner: '6aae9396c601110015a5152d',
+  __v: 0
+} 201
+GET → https://thinking-tester-contact-list.herokuapp.com/contacts/6acbe28ed52a6c001565e06a
+{
+  _id: '6acbe28ed52a6c001565e06a',
+  firstName: 'John',
+  lastName: 'Doe',
+  birthdate: '1970-01-01',
+  email: 'jdoe@fake.com',
+  phone: '8005555555',
+  street1: '1 Main St.',
+  street2: 'Apartment A',
+  city: 'New York',
+  stateProvince: 'KS',
+  postalCode: '12345',
+  country: 'USA',
+  owner: '6aae9396c601110015a5152d',
+  __v: 0
+} 200

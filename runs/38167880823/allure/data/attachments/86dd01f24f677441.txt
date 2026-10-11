@@ -1,0 +1,3 @@
+POST → https://restful-booker.herokuapp.com/auth
+{ token: '8f6ac74b15ba61f' } 200
+New Token:  8f6ac74b15ba61f

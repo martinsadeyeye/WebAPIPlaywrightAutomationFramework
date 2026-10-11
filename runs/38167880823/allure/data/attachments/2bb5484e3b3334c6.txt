@@ -1,0 +1,3 @@
+Deleted Booking ID:  2084
+DELETE → https://restful-booker.herokuapp.com/booking/2084
+201

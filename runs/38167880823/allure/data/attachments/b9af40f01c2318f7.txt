@@ -1,0 +1,9 @@
+GET → https://restful-booker.herokuapp.com/booking/119
+{
+  firstname: 'Josh',
+  lastname: 'Allen',
+  totalprice: 111,
+  depositpaid: true,
+  bookingdates: { checkin: '2018-01-01', checkout: '2019-01-01' },
+  additionalneeds: 'midnight snack'
+} 200
