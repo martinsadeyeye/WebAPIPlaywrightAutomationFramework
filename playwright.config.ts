@@ -12,7 +12,6 @@ if (!process.env.WEB_BASE_URL) {
   throw new Error("WEB_BASE_URL must be set in environment variables");
 }
 
-
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
@@ -27,6 +26,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI
     ? [
+        ["blob"],
         ["list"],
         ["html", { outputFolder: "reports/html-report", open: "never" }],
         [
@@ -39,6 +39,7 @@ export default defineConfig({
         ["reporting-labs", reportingLabs],
       ]
     : [
+        ["blob", { outputDir: "blob-report" }],
         ["list"],
         ["html", { outputFolder: "reports/html-report", open: "never" }],
         [
@@ -50,7 +51,6 @@ export default defineConfig({
         ],
         ["reporting-labs", reportingLabs],
       ],
-
   use: {
     baseURL: process.env.WEB_BASE_URL,
     headless: !process.env.CI ? false : true,
