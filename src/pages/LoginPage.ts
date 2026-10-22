@@ -117,17 +117,28 @@ export class LoginPage extends BasePage {
     }
   }
 
-  async doLogin(username: string, password: string): Promise<void> {
-    console.log(`user cred: ${username} - ${password}`);
+  async fillEmailOrMobileNumber(username: string): Promise<void> {
     await this.emailOrMobileNumber.fill(username);
+  }
+
+  async fillPassword(password: string): Promise<void> {
     await this.password.fill(password);
+  }
+
+  async submit(): Promise<void> {
     await this.signInBtn.click();
   }
 
-
-  async isValidAmountErrorDisplayed(): Promise<Boolean> {
-    return await this.amountError.isVisible();
+  async doLogin(username: string, password: string): Promise<void> {
+    console.log(`user cred: ${username} - ${password}`);
+    await this.fillEmailOrMobileNumber(username);
+    await this.fillPassword(password);
+    await this.submit();
   }
+
+  // async isValidAmountErrorDisplayed(): Promise<Boolean> {
+  //   return await this.amountError.isVisible();
+  // }
 
   async doEnterOTP(
     digit1: string,

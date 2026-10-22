@@ -1,0 +1,625 @@
+import { Page, Locator, expect, Download } from "@playwright/test";
+
+export class UIActions {
+  constructor(private readonly page: Page) {}
+
+  // ---------------------------------------------------------
+  // 1. Buttons / icon buttons
+  // ---------------------------------------------------------
+  async clickButton(button: Locator): Promise<void> {
+    await button.click();
+  }
+
+  async doubleClickButton(button: Locator): Promise<void> {
+    await button.dblclick();
+  }
+
+  async rightClickButton(button: Locator): Promise<void> {
+    await button.click({ button: "right" });
+  }
+
+  async clickButtonAndWaitForNavigation(
+    button: Locator,
+    url?: string | RegExp,
+  ): Promise<void> {
+    await Promise.all([this.page.waitForURL(url ?? "**"), button.click()]);
+  }
+
+  async buttonIsEnabled(button: Locator): Promise<boolean> {
+    return await button.isEnabled();
+  }
+
+  // ---------------------------------------------------------
+  // 2. Links / navigation items
+  // ---------------------------------------------------------
+  async clickLink(link: Locator): Promise<void> {
+    await link.click();
+  }
+
+  async openLinkInNewTab(link: Locator): Promise<Page> {
+    const newPagePromise = this.page.context().waitForEvent("page");
+    await link.click();
+    const newPage = await newPagePromise;
+    await newPage.waitForLoadState();
+    return newPage;
+  }
+
+  async expectLinkHref(
+    link: Locator,
+    expectedHref: string | RegExp,
+  ): Promise<void> {
+    await expect(link).toHaveAttribute("href", expectedHref);
+  }
+
+  // ---------------------------------------------------------
+  // 3. Text inputs / textarea
+  // ---------------------------------------------------------
+  async fillText(input: Locator, value: string): Promise<void> {
+    await input.fill(value);
+  }
+
+  async appendText(input: Locator, value: string): Promise<void> {
+    await input.pressSequentially(value);
+  }
+
+  async clearText(input: Locator): Promise<void> {
+    await input.clear();
+  }
+
+  async getInputValue(input: Locator): Promise<string> {
+    return await input.inputValue();
+  }
+
+  async expectInputValue(
+    input: Locator,
+    expectedValue: string | RegExp,
+  ): Promise<void> {
+    await expect(input).toHaveValue(expectedValue);
+  }
+
+  // ---------------------------------------------------------
+  // 4. Password inputs
+  // ---------------------------------------------------------
+  async fillPassword(input: Locator, password: string): Promise<void> {
+    await input.fill(password);
+  }
+
+  async clearPassword(input: Locator): Promise<void> {
+    await input.clear();
+  }
+
+  async expectPasswordInput(input: Locator): Promise<void> {
+    await expect(input).toHaveAttribute("type", "password");
+  }
+
+  async togglePasswordVisibility(toggle: Locator): Promise<void> {
+    await toggle.click();
+  }
+
+  // ---------------------------------------------------------
+  // 5. Number / currency inputs
+  // ---------------------------------------------------------
+  async fillNumber(input: Locator, value: number): Promise<void> {
+    await input.fill(String(value));
+  }
+
+  async fillCurrency(input: Locator, amount: number): Promise<void> {
+    // Use the format expected by the application's input.
+    await input.fill(amount.toFixed(2));
+  }
+
+  async incrementNumber(input: Locator): Promise<void> {
+    await input.press("ArrowUp");
+  }
+
+  async decrementNumber(input: Locator): Promise<void> {
+    await input.press("ArrowDown");
+  }
+
+  async expectNumberValue(
+    input: Locator,
+    expectedValue: string | RegExp,
+  ): Promise<void> {
+    await expect(input).toHaveValue(expectedValue);
+  }
+
+  // ---------------------------------------------------------
+  // 6. Search inputs
+  // ---------------------------------------------------------
+  async search(input: Locator, query: string): Promise<void> {
+    await input.fill(query);
+    await input.press("Enter");
+  }
+
+  async fillSearch(input: Locator, query: string): Promise<void> {
+    await input.fill(query);
+  }
+
+  async clearSearch(input: Locator): Promise<void> {
+    await input.clear();
+  }
+
+  async submitSearchButton(button: Locator): Promise<void> {
+    await button.click();
+  }
+
+  // ---------------------------------------------------------
+  // 7. Dropdown / select / combobox
+  // ---------------------------------------------------------
+  async selectOption(select: Locator, value: string): Promise<void> {
+    await select.selectOption(value);
+  }
+
+  async selectOptionByLabel(select: Locator, label: string): Promise<void> {
+    await select.selectOption({ label });
+  }
+
+  async selectOptionByIndex(select: Locator, index: number): Promise<void> {
+    await select.selectOption({ index });
+  }
+
+  async selectCustomDropdownOption(
+    dropdown: Locator,
+    option: Locator,
+  ): Promise<void> {
+    await dropdown.click();
+    await option.click();
+  }
+
+  async getSelectedOption(select: Locator): Promise<string> {
+    return await select.inputValue();
+  }
+
+  // ---------------------------------------------------------
+  // 8. Autocomplete / typeahead
+  // ---------------------------------------------------------
+  async fillAutocomplete(input: Locator, value: string): Promise<void> {
+    await input.fill(value);
+  }
+
+  async chooseAutocompleteOption(option: Locator): Promise<void> {
+    await option.click();
+  }
+
+  async fillAndChooseAutocomplete(
+    input: Locator,
+    value: string,
+    option: Locator,
+  ): Promise<void> {
+    await input.fill(value);
+    await option.waitFor({ state: "visible" });
+    await option.click();
+  }
+
+  // ---------------------------------------------------------
+  // 9. Checkbox / radio / toggle switches
+  // ---------------------------------------------------------
+  async checkCheckbox(checkbox: Locator): Promise<void> {
+    await checkbox.check();
+  }
+
+  async uncheckCheckbox(checkbox: Locator): Promise<void> {
+    await checkbox.uncheck();
+  }
+
+  async selectRadio(radio: Locator): Promise<void> {
+    await radio.check();
+  }
+
+  async toggleSwitch(toggle: Locator): Promise<void> {
+    await toggle.click();
+  }
+
+  async setCheckboxState(checkbox: Locator, checked: boolean): Promise<void> {
+    if (checked) {
+      await checkbox.check();
+    } else {
+      await checkbox.uncheck();
+    }
+  }
+
+  async isChecked(locator: Locator): Promise<boolean> {
+    return await locator.isChecked();
+  }
+
+  // ---------------------------------------------------------
+  // 10. Date picker / time picker
+  // ---------------------------------------------------------
+  async fillDate(dateInput: Locator, date: string): Promise<void> {
+    // Supply a value in the format accepted by the input/application.
+    await dateInput.fill(date);
+  }
+
+  async fillTime(timeInput: Locator, time: string): Promise<void> {
+    await timeInput.fill(time);
+  }
+
+  async chooseDateFromCalendar(
+    datePicker: Locator,
+    dateOption: Locator,
+  ): Promise<void> {
+    await datePicker.click();
+    await dateOption.click();
+  }
+
+  async chooseTimeOption(
+    timePicker: Locator,
+    timeOption: Locator,
+  ): Promise<void> {
+    await timePicker.click();
+    await timeOption.click();
+  }
+
+  // ---------------------------------------------------------
+  // 11. Tables / grids (rows, cells, pagination)
+  // ---------------------------------------------------------
+  async getTableRowCount(rows: Locator): Promise<number> {
+    return await rows.count();
+  }
+
+  async clickTableRow(row: Locator): Promise<void> {
+    await row.click();
+  }
+
+  async getCellText(cell: Locator): Promise<string | null> {
+    return await cell.textContent();
+  }
+
+  async expectCellText(
+    cell: Locator,
+    expectedText: string | RegExp,
+  ): Promise<void> {
+    await expect(cell).toHaveText(expectedText);
+  }
+
+  async findRowByText(rows: Locator, text: string): Promise<Locator> {
+    const row = rows.filter({ hasText: text });
+    await expect(row).toHaveCount(1);
+    return row;
+  }
+
+  async clickRowAction(row: Locator, actionSelector: string): Promise<void> {
+    await row.locator(actionSelector).click();
+  }
+
+  async expectTableHasRows(rows: Locator): Promise<void> {
+    await expect(rows.first()).toBeVisible();
+  }
+
+  // ---------------------------------------------------------
+  // 12. Modals / dialogs / drawers
+  // ---------------------------------------------------------
+  async waitForDialog(dialog: Locator): Promise<void> {
+    await expect(dialog).toBeVisible();
+  }
+
+  async closeDialog(closeButton: Locator): Promise<void> {
+    await closeButton.click();
+  }
+
+  async confirmDialog(confirmButton: Locator): Promise<void> {
+    await confirmButton.click();
+  }
+
+  async cancelDialog(cancelButton: Locator): Promise<void> {
+    await cancelButton.click();
+  }
+
+  async expectDialogHidden(dialog: Locator): Promise<void> {
+    await expect(dialog).toBeHidden();
+  }
+
+  // ---------------------------------------------------------
+  // 13. Tabs / accordions
+  // ---------------------------------------------------------
+  async selectTab(tab: Locator): Promise<void> {
+    await tab.click();
+  }
+
+  async expectTabSelected(tab: Locator): Promise<void> {
+    await expect(tab).toHaveAttribute("aria-selected", "true");
+  }
+
+  async expandAccordion(accordionTrigger: Locator): Promise<void> {
+    await accordionTrigger.click();
+  }
+
+  async expectAccordionExpanded(accordionTrigger: Locator): Promise<void> {
+    await expect(accordionTrigger).toHaveAttribute("aria-expanded", "true");
+  }
+
+  // ---------------------------------------------------------
+  // 14. Toasts / alerts / banners
+  // ---------------------------------------------------------
+  async waitForToast(toast: Locator): Promise<void> {
+    await expect(toast).toBeVisible();
+  }
+
+  async expectToastText(
+    toast: Locator,
+    expectedText: string | RegExp,
+  ): Promise<void> {
+    await expect(toast).toContainText(expectedText);
+  }
+
+  async dismissAlert(dismissButton: Locator): Promise<void> {
+    await dismissButton.click();
+  }
+
+  // ---------------------------------------------------------
+  // 15. Tooltips / popovers
+  // ---------------------------------------------------------
+  async hover(locator: Locator): Promise<void> {
+    await locator.hover();
+  }
+
+  async showTooltipByFocus(locator: Locator): Promise<void> {
+    await locator.focus();
+  }
+
+  async openPopover(trigger: Locator): Promise<void> {
+    await trigger.click();
+  }
+
+  async expectTooltipVisible(tooltip: Locator): Promise<void> {
+    await expect(tooltip).toBeVisible();
+  }
+
+  async closePopover(closeButton: Locator): Promise<void> {
+    await closeButton.click();
+  }
+
+  // ---------------------------------------------------------
+  // 16. File upload inputs / drag-and-drop upload areas
+  // ---------------------------------------------------------
+  async uploadFile(input: Locator, filePath: string): Promise<void> {
+    await input.setInputFiles(filePath);
+  }
+
+  async uploadFiles(input: Locator, filePaths: string[]): Promise<void> {
+    await input.setInputFiles(filePaths);
+  }
+
+  async clearUploadedFiles(input: Locator): Promise<void> {
+    await input.setInputFiles([]);
+  }
+
+  async uploadBuffer(
+    input: Locator,
+    fileName: string,
+    mimeType: string,
+    buffer: Buffer,
+  ): Promise<void> {
+    await input.setInputFiles({
+      name: fileName,
+      mimeType,
+      buffer,
+    });
+  }
+
+  async expectDownload(action: () => Promise<void>): Promise<Download> {
+    const downloadPromise = this.page.waitForEvent("download");
+    await action();
+    return await downloadPromise;
+  }
+
+  // ---------------------------------------------------------
+  // 17. Lists / cards
+  // ---------------------------------------------------------
+  async clickListItem(item: Locator): Promise<void> {
+    await item.click();
+  }
+
+  async getListItemCount(items: Locator): Promise<number> {
+    return await items.count();
+  }
+
+  async findCardByText(cards: Locator, text: string): Promise<Locator> {
+    const card = cards.filter({ hasText: text });
+    await expect(card).toHaveCount(1);
+    return card;
+  }
+
+  async clickCardAction(card: Locator, actionSelector: string): Promise<void> {
+    await card.locator(actionSelector).click();
+  }
+
+  // ---------------------------------------------------------
+  // 18. Breadcrumbs
+  // ---------------------------------------------------------
+  async clickBreadcrumb(breadcrumb: Locator): Promise<void> {
+    await breadcrumb.click();
+  }
+
+  async expectBreadcrumbText(
+    breadcrumb: Locator,
+    expectedText: string | RegExp,
+  ): Promise<void> {
+    await expect(breadcrumb).toHaveText(expectedText);
+  }
+
+  // ---------------------------------------------------------
+  // 19. Pagination controls
+  // ---------------------------------------------------------
+  async goToNextPage(nextButton: Locator): Promise<void> {
+    await nextButton.click();
+  }
+
+  async goToPreviousPage(previousButton: Locator): Promise<void> {
+    await previousButton.click();
+  }
+
+  async goToPage(pageButton: Locator): Promise<void> {
+    await pageButton.click();
+  }
+
+  async expectCurrentPage(
+    currentPage: Locator,
+    pageNumber: string,
+  ): Promise<void> {
+    await expect(currentPage).toHaveText(pageNumber);
+  }
+
+  // ---------------------------------------------------------
+  // 20. Rich text editor (if applicable)
+  // ---------------------------------------------------------
+  async fillRichTextEditor(editor: Locator, content: string): Promise<void> {
+    await editor.fill(content);
+  }
+
+  async typeIntoRichTextEditor(
+    editor: Locator,
+    content: string,
+  ): Promise<void> {
+    await editor.pressSequentially(content);
+  }
+
+  async clearRichTextEditor(editor: Locator): Promise<void> {
+    await editor.clear();
+  }
+
+  async expectRichTextContent(
+    editor: Locator,
+    expectedContent: string | RegExp,
+  ): Promise<void> {
+    await expect(editor).toContainText(expectedContent);
+  }
+
+  // ---------------------------------------------------------
+  // General utility actions
+  // ---------------------------------------------------------
+  async waitForVisible(locator: Locator): Promise<void> {
+    await locator.waitFor({ state: "visible" });
+  }
+
+  async waitForHidden(locator: Locator): Promise<void> {
+    await locator.waitFor({ state: "hidden" });
+  }
+
+  async isVisible(locator: Locator): Promise<boolean> {
+    return await locator.isVisible();
+  }
+
+  async isEnabled(locator: Locator): Promise<boolean> {
+    return await locator.isEnabled();
+  }
+
+  async getText(locator: Locator): Promise<string | null> {
+    return await locator.textContent();
+  }
+
+  async expectVisible(locator: Locator): Promise<void> {
+    await expect(locator).toBeVisible();
+  }
+
+  async expectHidden(locator: Locator): Promise<void> {
+    await expect(locator).toBeHidden();
+  }
+
+  async expectText(
+    locator: Locator,
+    expectedText: string | RegExp,
+  ): Promise<void> {
+    await expect(locator).toHaveText(expectedText);
+  }
+
+  async pressKey(locator: Locator, key: string): Promise<void> {
+    await locator.press(key);
+  }
+
+  async scrollIntoView(locator: Locator): Promise<void> {
+    await locator.scrollIntoViewIfNeeded();
+  }
+}
+
+
+
+playwright-project/
+├── locators/
+│   ├── LoginLocators.ts
+│   ├── ProductsLocators.ts
+│   └── CheckoutLocators.ts
+├── pages/
+│   ├── LoginPage.ts
+│   ├── ProductsPage.ts
+│   └── CheckoutPage.ts
+├── utils/
+│   └── UIActions.ts
+├── tests/
+│   └── login.spec.ts
+└── playwright.config.ts
+
+
+Create locators/LoginLocators.ts
+import { Page } from '@playwright/test';
+
+//Playwright's getByTestId() uses data-testid by default
+export const LoginLocators = (page: Page) => ({
+    usernameInput: page.getByTestId('username-input'),
+    passwordInput: page.getByTestId('password-input'),
+    loginButton: page.getByTestId('login-button'),
+    errorMessage: page.getByTestId('error-message'),
+});
+
+
+
+Update pages/LoginPage.ts
+Your Page Object no longer needs to declare every locator separately inside the constructor.
+import { Page } from '@playwright/test';
+import { UIActions } from '../utils/UIActions';
+import { LoginLocators } from '../locators/LoginLocators';
+
+export class LoginPage {
+    private readonly actions: UIActions;
+    private readonly locators: ReturnType<typeof LoginLocators>;
+
+    constructor(private readonly page: Page) {
+        this.actions = new UIActions(page);
+        this.locators = LoginLocators(page);
+    }
+
+    async goto(): Promise<void> {
+        await this.page.goto('https://www.saucedemo.com/');
+    }
+
+    async fillUsername(username: string): Promise<void> {
+        await this.actions.fillText(
+            this.locators.usernameInput,
+            username
+        );
+    }
+
+    async fillPassword(password: string): Promise<void> {
+        await this.actions.fillPassword(
+            this.locators.passwordInput,
+            password
+        );
+    }
+
+    async submit(): Promise<void> {
+        await this.actions.clickButton(
+            this.locators.loginButton
+        );
+    }
+
+    async login(username: string, password: string): Promise<void> {
+        await this.fillUsername(username);
+        await this.fillPassword(password);
+        await this.submit();
+    }
+}
+
+
+
+4. Call the Page Object from your test
+import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+
+test('User can log in successfully', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.goto();
+    await loginPage.login('standard_user', 'secret_sauce');
+
+    await expect(page).toHaveURL(/inventory/);
+});
